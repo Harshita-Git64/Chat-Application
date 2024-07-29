@@ -11,13 +11,19 @@ import messageRoutes from "./Routes/message.routes.js"
 import userRoutes from "./Routes/user.routes.js"
 import connectToMongoDB from "./db/connectToMongoDB.js"
 import cookieParser from "cookie-parser"
+import cors from 'cors';
 
 dotenv.config()
 const app=new express();
 const PORT=process.env.PORT || 5000
 
+
 app.use(express.json())//it extracts the fields from req.body
 app.use(cookieParser())//to parse the incoming cookies from req.cookies,before we run below routes we run this middleware to access the cookie
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true, // if you need to include cookies in requests
+  }));
 
 app.use("/api/auth/",authRoutes)
 app.use("/api/message/",messageRoutes)
