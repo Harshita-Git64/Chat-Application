@@ -36,20 +36,17 @@ export const signup=async(req,res)=>{
             _id:newUser._id,
             fullName:newUser.fullName,
             username:newUser.username,
-            password:newUser.password,
             profilePic:newUser.profilePic
         })
     }
     else{
         return res.status(400).json({error:"Invalid user data"})
     }
-   
 }
 catch(error){
 console.log("error in signup",error.message)
-res.status(500).json({error:"internal server error"})
+res.status(500).json({error:"internal server error found"})
 }
-    //res.send("this is Signup page")
 }
 
 export const login=async(req,res)=>{
@@ -76,7 +73,6 @@ export const login=async(req,res)=>{
         console.log("Error in login:",error.message)
         res.status(500).json({error:"internal sever error"})
     }
-   
 }
 
 export const logout=async(req,res)=>{
@@ -88,7 +84,6 @@ export const logout=async(req,res)=>{
         console.log("error in logout",error.message)
         res.status(501).json({message:"Internal server error"})
     }
-   
 }
 export const getUserDetails=async(req,res)=>{
     try{
