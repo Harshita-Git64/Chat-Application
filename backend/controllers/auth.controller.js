@@ -51,7 +51,7 @@ res.status(500).json({error:"internal server error found"})
 
 export const login=async(req,res)=>{
     try{
-        const{password,username}=req.body;
+        const{username,password}=req.body;
         const user=await User.findOne({username})
         const isPassword=await bcrypt.compare(password,user?.password || "")
         if(!user || !isPassword)
@@ -64,7 +64,6 @@ export const login=async(req,res)=>{
                 _id:user._id,
                 fullName:user.fullName,
                 username:user.username,
-                password:user.password,
                 profilePic:user.profilePic
             })
         
@@ -80,14 +79,13 @@ export const logout=async(req,res)=>{
     res.cookie("cookies","",{maxAge:0})
    return res.status(200).json({message:"user logged out sucessfully"})
     }
-    catch(errors){
+    catch(error){
         console.log("error in logout",error.message)
         res.status(501).json({message:"Internal server error"})
     }
 }
 export const getUserDetails=async(req,res)=>{
     try{
-
         const Users=await User.find({})
         res.json(Users)
     }

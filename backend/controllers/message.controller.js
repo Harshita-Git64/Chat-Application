@@ -28,15 +28,14 @@ export const sendMessage=async(req,res)=>{
 			conversation.messages.push(newMessage._id);
 		}
 
-        // await conversation.save();
-		// await newMessage.save();
+        await conversation.save();
+		 await newMessage.save();
 
 		// this will run in parallel
-		await Promise.all([conversation.save(), newMessage.save()]);
+		//await Promise.all([conversation.save(), newMessage.save()]);
 
         res.status(200).json(newMessage)
 
-       
     }
     catch(error){
         res.status(500).json({error:"internal server error"})
@@ -54,15 +53,15 @@ export const getMessage=async(req,res)=>{
 		}).populate("messages");//not reference but actual message info from messagemmodel.
         
 		if (!conversation) {
-		res.status(200).json([])
+		return res.status(200).json([])
 		}
 		const messages=conversation.messages;
-		res.status(200).json(messages)
+		return res.status(200).json(messages)
 
 	}
 	catch(error){
-		res.status(500).json({error:"internal server error"})
         console.log("error on getting message",error.message)
+		return res.status(500).json({error:"internal server error"})
 	}
 	
 }
