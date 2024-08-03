@@ -1,7 +1,7 @@
 import React, { useState } from "react"; 
 import useSignup from "../../hooks/useSignup";
 import GenderCheckBox from "./GenderCheckBox";
-
+import { Link } from "react-router-dom";
 
 function SignUp() {
 
@@ -12,20 +12,23 @@ const[inputs,setInput]=useState({
   confirmPassword:"",
   gender:""
 })
-const{loading,signup}=useSignup();
+const {loading,signup}=useSignup();
+
+const handleGenderChange=(gender)=>{
+  setInput({...inputs,gender})
+}
 
 async function handleSubmit(e){
 e.preventDefault()
 await signup(inputs)
+//console.log(inputs)
 
 }
   return (
     <div className="bg-hero bg-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)) h-screen no-repeat bg-center bg-cover w-screen flex flex-col justify-center items-center p-4">
       <h1 className="text-3xl font-bold text-black mb-8 font-serif">SignUp</h1>
-
       <form onSubmit={handleSubmit}>
-        <div className="rounded-md border border-gray-500 justify-center items-center p-5 mb-20 backdrop-blur bg-orange-300">
-
+        <div className="rounded-md border border-gray-500 justify-center items-center p-5 mb-10 backdrop-blur bg-orange-300">
         <label className="label p-2">
             <span className="text-base label-text ">FullName</span>
           </label>
@@ -36,7 +39,6 @@ await signup(inputs)
             value={inputs.fullName}
             onChange={(e)=>setInput({...inputs,fullName:e.target.value})}
           />
-
 
           <label className="label p-2">
             <span className="text-base label-text ">Username</span>
@@ -70,11 +72,15 @@ await signup(inputs)
             value={inputs.confirmPassword}
             onChange={(e)=>setInput({...inputs,confirmPassword:e.target.value})}
           />
-           <GenderCheckBox/>
-          <p className="mt-2 text-base label-text">Already have an account? Login here </p>
+           <GenderCheckBox onClickCheckBox={handleGenderChange} selectedGender={inputs.gender}/>
+          <p className="mt-2 text-base label-text">Already have an account? <Link to='/login'>Login here </Link></p>
          
-          <button className='btn btn-block btn-sm mt-2 text-base label-text'>
+          {/* <button className='btn btn-block btn-sm mt-2 text-base label-text'>
 							SignUp
+						</button> */}
+
+            <button className='btn btn-block btn-sm mt-2 border border-slate-700' disabled={loading}>
+							{loading ? <span className='loading loading-spinner'></span> : "Sign Up"}
 						</button>
         </div>
       </form>
