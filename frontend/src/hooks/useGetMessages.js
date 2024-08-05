@@ -11,7 +11,7 @@ const useGetMessages = () => {
       setLoading(true);
       try {
         const res = await fetch(
-          `http://localhost:5000/api/message/get/${selectedConversation._id}`,
+          `https://chat-application-7raa.onrender.com/api/message/get/${selectedConversation._id}`,
           {
             method: "GET",
             headers: { "Content-Type": "application/json" },
