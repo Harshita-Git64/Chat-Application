@@ -37,7 +37,7 @@ try {
 function handleValidations(username,password){
    
     if(!username || !password ){
-        toast.error("fields can't be empty")
+        toast.error("Fields can't be empty")
         return false;
     }
     if(password.length<6){
