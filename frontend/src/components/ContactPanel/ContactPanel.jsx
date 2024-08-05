@@ -5,14 +5,11 @@ import UserInfo from './UserInfo'
 
 function ContactPanel() {
   return (
-    <div className='flex flex-col w-1/3 border border-red-400 rounded-md m-3 bg-slate-50 p-4' >
+    <div className='flex flex-col w-1/3 border border-gray-300 rounded-md m-3 bg-slate-50 p-4' >
         <UserInfo/>
         <p className='font-semibold text-xl my-4'>Chats</p>
         <SearchBar/>
-        {/* <div className='divider px-3'></div> */}
         <ContactList/>
-       
-
     </div>
   )
 }
