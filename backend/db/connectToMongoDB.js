@@ -1,4 +1,3 @@
-//const mongoose =require("mongoose")
 import mongoose from "mongoose";
 
 const connectToMongoDB=async()=>{
@@ -9,11 +8,8 @@ const connectToMongoDB=async()=>{
         console.log("MongoDB connected..");
     }
     catch(error ){
-        console.log("error in connecting to mongodb",error.message)
-        
+        console.log("error in connecting to mongodb",error.message) 
     }
-   
 }
 
 export default connectToMongoDB;
-//module.exports=connectToMongoDB;
